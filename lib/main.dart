@@ -1,7 +1,6 @@
-// main.dart
 import 'package:flutter/material.dart';
-
-import 'SecondPage.dart';
+import 'second_page.dart';
+import 'third_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,25 +12,64 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: Center(
-              child: Column(
-                children: [
-                  Text('Weeee x2', style: TextStyle(color: Colors.cyan)),
-                  Text('hii'),
-                  Text('Aap el gay kyun hain'),
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    SecondPage()));
-                      },
-                      child: Text("HEYY PRESS MEE!!! :3"))
-                ],
-              )),
-        ));
+      title: 'Simple Navigation',
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home Page'),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Second(),
+                  ),
+                );
+              },
+              child: const Text('Go to Second Page'),
+            ),
+            ElevatedButton(onPressed: (){
+              Navigator.push(
+                context, MaterialPageRoute(builder: (context) => const ThirdPage(),
+              ),
+              );
+            },
+                child: const Text('arghhh off we go to the 3rd page')
+            )
+          ],
+        )
+      ),
+    );
+  }
+}
+
+class Second extends StatelessWidget {
+  const Second({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SecondPage();
+  }
+}
+
+class Third extends StatelessWidget {
+  const Third({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const ThirdPage();
   }
 }
