@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              Text('Weeee x2', style:TextStyle(color:Colors.cyan))
+              Text('Weeee x2', style:TextStyle(color:Colors.cyan)),
+              Text('hii'),
             ],
           )
         ),
