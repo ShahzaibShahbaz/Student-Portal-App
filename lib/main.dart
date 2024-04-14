@@ -14,8 +14,6 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-
             children: [
               Text('Weeee x2', style:TextStyle(color:Colors.cyan))
             ],
