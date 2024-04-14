@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "316360646191",
+    "project_id": "flex-studentapp",
+    "storage_bucket": "flex-studentapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316360646191:android:78c6d2e628ef0bf0b1f0da",
+        "android_client_info": {
+          "package_name": "com.example.iftikhars_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQdJdTFWTIV10IkwzHJ6j-baQgyyZ0PEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
