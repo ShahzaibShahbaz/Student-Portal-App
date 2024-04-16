@@ -107,8 +107,6 @@ class _FirstPageIPState extends State<FirstPageIP> {
                       ? Text("Don't have an account? Sign Up")
                       : Text("Already Signed Up? Login"))
             ],
-
-
           ),
         ),
       ),
