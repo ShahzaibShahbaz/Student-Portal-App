@@ -1,11 +1,28 @@
+import 'dart:js';
+import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 String userName = "random";
 String RollNo = "76L9051";
 String DOB = "12/04/1878";
 
+
+
 class SecondPage extends StatelessWidget {
-  const SecondPage({super.key});
+   SecondPage({super.key});
+
+  final CollectionReference collectionRef = FirebaseFirestore.instance.collection('users');
+  Future getData()async{
+    try{
+      var temp = await collectionRef.doc('mhC7KCMvLSkeo2WyYsKb').get();
+      print(temp);
+
+    }catch(e){
+      debugPrint("ERROR -$e");
+      return e;
+    }
+  }
 
   @override
   Widget build(BuildContext build){
@@ -13,28 +30,33 @@ class SecondPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Second Page'),
       ),
-      body: Stack(
-       children: [
-         Container(
-           color: Colors.black,
-           //padding: EdgeInsets.symmetric(vertical: 20,horizontal: 1000),
-         ),
-         Container(
-           child: Row(
-             children: [
-               Column(
-               children: [
-                 Text (userName),
-                 Text (DOB),
-                 Text ('Lahore Campus'),
-               ],
-             ),]
-           ),
-           color: Color(0xFFE1F197),
-         )
-
-       ],
+      body:
+      StreamBuilder<QuerySnapshot>(
+        stream: collectionRef.snapshots(),
+        builder: (context, userSnapshot) {
+          if (!userSnapshot.hasData) {
+            return Text('No Data...');
+          } else {
+            List<QueryDocumentSnapshot> items = userSnapshot.data!.docs;
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(items.isNotEmpty ? items[0]['name'] : 'No Name'),
+                Text(items.isNotEmpty ? items[0]['blood_group'] : 'No Blood Group'),
+                Text(items.isNotEmpty ? items[0]['CNIC'] : 'No CNIC'),
+                Text(items.isNotEmpty ? items[0]['email'] : 'No Email'),
+                Text(items.isNotEmpty ?
+                (items[0]['DOB'] != null ?
+                items[0]['DOB'].toDate().toString() :
+                'No DOB'
+                ) :
+                'No DOB',),
+              ],
+            );
+          }
+        },
       )
     );
+
   }
 }
