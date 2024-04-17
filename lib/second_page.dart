@@ -38,20 +38,48 @@ class SecondPage extends StatelessWidget {
             return Text('No Data...');
           } else {
             List<QueryDocumentSnapshot> items = userSnapshot.data!.docs;
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(items.isNotEmpty ? items[0]['name'] : 'No Name'),
-                Text(items.isNotEmpty ? items[0]['blood_group'] : 'No Blood Group'),
-                Text(items.isNotEmpty ? items[0]['CNIC'] : 'No CNIC'),
-                Text(items.isNotEmpty ? items[0]['email'] : 'No Email'),
-                Text(items.isNotEmpty ?
-                (items[0]['DOB'] != null ?
-                items[0]['DOB'].toDate().toString() :
-                'No DOB'
-                ) :
-                'No DOB',),
-              ],
+            return Container(
+              padding: EdgeInsets.all(30),
+              width: 450,
+              height: 150,
+
+              color: Color(0xFFE1F197),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(items.isNotEmpty ? items[0]['name'] : 'No Name'),
+                    ],
+                  ),
+                  SizedBox(height: 15,),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(items.isNotEmpty ? items[0]['blood_group'] : 'No Blood Group'),
+                            SizedBox(height: 5,),
+                            Text(items.isNotEmpty ? items[0]['CNIC'] : 'No CNIC'),
+                          ],
+                        ),
+                        SizedBox(width: 30),
+                        Column(
+                            children: [
+                              Text(items.isNotEmpty ? items[0]['email'] : 'No Email'),
+                              SizedBox(height: 5,),
+                              Text(items.isNotEmpty ?
+                              (items[0]['DOB'] != null ?
+                              items[0]['DOB'].toDate().toString() :
+                              'No DOB'
+                              ) :
+                              'No DOB',),
+                            ]
+                        )
+                      ]
+                  )
+                ],
+              ),
             );
           }
         },
