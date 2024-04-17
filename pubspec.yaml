@@ -41,6 +41,8 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   get: ^4.6.6
+  intl: ^0.18.1
+
 
 
 
