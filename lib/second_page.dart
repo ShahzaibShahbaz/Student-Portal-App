@@ -1,4 +1,4 @@
-import 'dart:js';
+// import 'dart:js';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +13,17 @@ class SecondPage extends StatelessWidget {
    SecondPage({super.key});
 
   final CollectionReference collectionRef = FirebaseFirestore.instance.collection('users');
-  Future getData()async{
+
+  Future getData() async{
     try{
-      var temp = await collectionRef.doc('mhC7KCMvLSkeo2WyYsKb').get();
-      print(temp);
+      Map<String, dynamic> emptyMap = {};
+      DocumentSnapshot<Map<String, dynamic>> temp = await collectionRef.doc('21L-5456').get() as DocumentSnapshot<Map<String, dynamic>>;
+
+      if (temp.exists) {
+        emptyMap.addAll(temp.data()!);
+      }
+
+      print(emptyMap['name']);
 
     }catch(e){
       debugPrint("ERROR -$e");
@@ -26,13 +33,15 @@ class SecondPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext build){
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Second Page'),
       ),
       body:
       StreamBuilder<QuerySnapshot>(
-        stream: collectionRef.snapshots(),
+
+        stream: collectionRef.snapshots() ,
         builder: (context, userSnapshot) {
           if (!userSnapshot.hasData) {
             return Text('No Data...');
@@ -41,7 +50,8 @@ class SecondPage extends StatelessWidget {
             return Container(
               padding: EdgeInsets.all(30),
               width: 450,
-              height: 150,
+              height: 300,
+
 
               color: Color(0xFFE1F197),
               child: Column(
@@ -56,14 +66,14 @@ class SecondPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
-                          //crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(items.isNotEmpty ? items[0]['blood_group'] : 'No Blood Group'),
                             SizedBox(height: 5,),
                             Text(items.isNotEmpty ? items[0]['CNIC'] : 'No CNIC'),
                           ],
                         ),
-                        SizedBox(width: 30),
+                        //SizedBox(width: 30),
                         Column(
                             children: [
                               Text(items.isNotEmpty ? items[0]['email'] : 'No Email'),
@@ -74,6 +84,7 @@ class SecondPage extends StatelessWidget {
                               'No DOB'
                               ) :
                               'No DOB',),
+                              ElevatedButton(onPressed: () async{await getData();}, child: Text("CLICK ME!!!! :3"))
                             ]
                         )
                       ]
